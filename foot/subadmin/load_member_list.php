@@ -1,0 +1,80 @@
+<?php 
+    
+include_once 'session.php'; 
+
+if(empty($_POST['search'])){
+    $sqlQuery  = mysql_query("SELECT * FROM `member` order by id desc");
+}else{
+    $sr = $_POST['search']; 
+    $sqlQuery  = mysql_query("SELECT * FROM `member`  WHERE `username`='$sr' order by id desc");
+}
+
+ 
+
+$count  = mysql_num_rows($sqlQuery);
+
+
+$adjacents = 2;
+$records_per_page = 10;
+
+$page = (int) (isset($_POST['page_id']) ? $_POST['page_id'] : 1);
+$page = ($page == 0 ? 1 : $page);
+$start = ($page-1) * $records_per_page;
+
+$next = $page + 1;
+$prev = $page - 1;
+$last_page = ceil($count/$records_per_page);
+$second_last = $last_page - 1;
+
+$pagination = pagenation($adjacents,$records_per_page,$page,$start,$next,$prev,$last_page,$second_last);
+    
+?>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+    	<th>Name</th>
+      	<th>Username</th> 
+      	<th>Contact</th>
+      	<th>Email</th>
+      	<th>Balance</th>
+		<th>Currency</th>
+		<th style="width: 9em;"></th>		
+    </tr>
+  </thead>
+  <tbody>
+  
+  
+  <?php 
+  
+  if(empty($_POST['search'])){
+      $query = Query("SELECT * FROM `member` order by id desc LIMIT $start, $records_per_page");
+  }else{
+      $sr = $_POST['search'];
+      $query = Query("SELECT * FROM `member`  WHERE `username` = '$sr' order by id desc LIMIT $start, $records_per_page");
+  } 
+  
+$i=1;
+    while($row = QueryArray($query)){
+       echo '<tr> 
+<td>'.$row['fname'].' '.$row['lname'].'</td>       
+<td>'.$row['username'].'</td>
+<td>'.$row['mobile'].'</td>  
+<td>'.$row['email'].'</td> 
+<td>'.$row['balance'].'</td>
+<td>'.$row['currency'].'</td>
+<td>
+			<a href="password_update.php?id='.$row['id'].'"><i class="fa fa-key"></i></a>&nbsp;&nbsp;
+			<a href="profile_view.php?id='.$row['id'].'"><i class="fa fa-eye"></i></a>&nbsp;&nbsp;
+			<a href="profile_edit.php?id='.$row['id'].'"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;				
+            <a href="user_balance_history.php?id='.$row['id'].'"><i class="fa fa-history"></i></a>&nbsp;&nbsp; 
+</td>
+</tr>';
+    }
+   
+  ?> 
+  </tbody>
+</table>
+<?php echo $pagination;?>

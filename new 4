@@ -1,0 +1,46 @@
+<?php 
+ //chacked security k1
+session_start();
+$_SESSION['song_source_check']=0;
+unset($_SESSION['song_source_checkvalue']); 
+$_SESSION['song_source_checkvalue2']=0; 
+setcookie("song_source_check","0");  // If 0 then create new audio object else change source
+if(isset($_SESSION['logintemp']))
+{
+	require_once("basic2.php");
+	$mycrop_pic=$_SESSION['imagepic'];
+	$nameX=$_SESSION['nameX'];
+	$myprivacy=$_SESSION['mycrop_privacy'];
+	$myid=$_SESSION['user_idX'];
+	$myuid=$_SESSION['uidperson'];
+}
+require_once("include/function.php");
+require_once("imp/function.php");
+
+?>
+<?php require_once("start_html_head.php"); ?>
+		<title>NightBird Competition Platform</title>
+		<meta name="description" content="Nightbird is an online competition platform for singer, Actor, dancer, comedian. Here they can participate in our competition">
+	    <meta name="keywords" content="Night bird, Nightbird,nightbird.in,competition platform,online competition,audition,online audition,contest">	 
+		
+	</head>
+	<body>
+	
+	<?php include_once("headertop.php");?>
+	
+	
+</head>
+<body>
+<br>
+<div class="container">
+ <div class="alert alert-warning" role="alert">
+  <a href="#" class="alert-link">Under Construction </a>
+</div>
+</div><br>
+	<?php
+	include_once("footer0pad.php"); 
+	?>
+		
+		
+	</body>
+</html>

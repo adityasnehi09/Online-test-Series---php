@@ -1,0 +1,7 @@
+User-Agent: *
+Disallow: 
+Disallow: /foot
+Disallow: /admin
+Disallow: /img
+
+Sitemap: http://indotufan.com/sitemap.xml

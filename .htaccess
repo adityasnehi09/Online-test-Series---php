@@ -1,0 +1,32 @@
+# turn rewrite engine on
+RewriteEngine on
+#rewrite for project.php
+RewriteRule ^contact contact.php [NC,L]
+#RewriteRule ^login loginForm.php [NC,L]
+RewriteRule ^sign-up sign-up.php [NC,L]
+RewriteRule ^about about.php [NC,L]
+RewriteRule ^services services.php [NC,L]
+RewriteRule ^gate gate.php [NC,L]
+RewriteRule ^jee-main jee-main.php [NC,L]
+RewriteRule ^jee-advance jee-advance.php [NC,L]
+RewriteRule ^logout logout.php [NC,L]
+RewriteRule ^result result.php [NC,L]
+RewriteRule ^ranklist ranklist.php [NC,L]
+RewriteRule ^change-email changemyemail.php [NC,L]
+RewriteRule ^change-name changename.php [NC,L]
+RewriteRule ^change-password changepassword.php [NC,L]
+RewriteRule ^demand-quiz demand-quiz.php [NC,L]
+RewriteRule ^ui upload_images [NC,L]
+
+RewriteRule ^profile/([0-9a-zA-Z]+) profile.php?id=$1 [NC,L]
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
